@@ -60,8 +60,9 @@ REST_FRAMEWORK = {
 
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',  # Ensure users must be authenticated to access any endpoint
-    ),
+    'rest_framework.permissions.AllowAny',
+),
+
 }
 
 
@@ -70,8 +71,8 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
     'BLACKLIST_AFTER_ROTATION': True,  # Optional: Blacklist old tokens after rotation
 }
-
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # ✅ Place this at the top (after SecurityMiddleware ideally)
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -79,8 +80,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
+CORS_ALLOW_HEADERS = [
+    'authorization',
+    'content-type',
+    'x-csrftoken',
+    'accept',
+    'origin',
+    'user-agent',
+    'x-requested-with',
+]
+CSRF_TRUSTED_ORIGINS = [
+    "https://job-portal-frontend-ut9p.vercel.app"
+]
+
 CORS_ALLOWED_ORIGINS = [
     "https://job-portal-frontend-ut9p.vercel.app",
 ]
