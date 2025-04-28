@@ -16,3 +16,4 @@ django-cors-headers==3.5.0
 jsonfield==3.1.0
 python-dotenv==0.21.0
 Pillow==9.3.0
+dj-database-url
